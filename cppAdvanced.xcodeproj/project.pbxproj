@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		ED091D59243B0F3F00B002D1 /* User.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED091D57243B0F3F00B002D1 /* User.cpp */; };
+		ED091D5C243B101300B002D1 /* Film.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED091D5A243B101300B002D1 /* Film.cpp */; };
+		ED091D5F243B120400B002D1 /* Series.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED091D5D243B120400B002D1 /* Series.cpp */; };
 		ED794E5E2433D2EB0039066B /* mysqlConnector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED794E5C2433D2EB0039066B /* mysqlConnector.cpp */; };
 		EDF198CE24334568005BF25D /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDF198CD24334568005BF25D /* main.cpp */; };
 /* End PBXBuildFile section */
@@ -24,6 +27,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		ED091D57243B0F3F00B002D1 /* User.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = User.cpp; sourceTree = "<group>"; };
+		ED091D58243B0F3F00B002D1 /* User.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = User.hpp; sourceTree = "<group>"; };
+		ED091D5A243B101300B002D1 /* Film.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Film.cpp; sourceTree = "<group>"; };
+		ED091D5B243B101300B002D1 /* Film.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Film.hpp; sourceTree = "<group>"; };
+		ED091D5D243B120400B002D1 /* Series.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Series.cpp; sourceTree = "<group>"; };
+		ED091D5E243B120400B002D1 /* Series.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Series.hpp; sourceTree = "<group>"; };
 		ED794E5C2433D2EB0039066B /* mysqlConnector.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = mysqlConnector.cpp; sourceTree = "<group>"; };
 		ED794E5D2433D2EB0039066B /* mysqlConnector.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = mysqlConnector.hpp; sourceTree = "<group>"; };
 		EDF198CA24334568005BF25D /* cppAdvanced */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = cppAdvanced; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -63,6 +72,12 @@
 				EDF198CD24334568005BF25D /* main.cpp */,
 				ED794E5C2433D2EB0039066B /* mysqlConnector.cpp */,
 				ED794E5D2433D2EB0039066B /* mysqlConnector.hpp */,
+				ED091D57243B0F3F00B002D1 /* User.cpp */,
+				ED091D58243B0F3F00B002D1 /* User.hpp */,
+				ED091D5A243B101300B002D1 /* Film.cpp */,
+				ED091D5B243B101300B002D1 /* Film.hpp */,
+				ED091D5D243B120400B002D1 /* Series.cpp */,
+				ED091D5E243B120400B002D1 /* Series.hpp */,
 			);
 			path = cppAdvanced;
 			sourceTree = "<group>";
@@ -124,6 +139,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED091D59243B0F3F00B002D1 /* User.cpp in Sources */,
+				ED091D5C243B101300B002D1 /* Film.cpp in Sources */,
+				ED091D5F243B120400B002D1 /* Series.cpp in Sources */,
 				ED794E5E2433D2EB0039066B /* mysqlConnector.cpp in Sources */,
 				EDF198CE24334568005BF25D /* main.cpp in Sources */,
 			);

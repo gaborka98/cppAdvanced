@@ -12,6 +12,10 @@
 #include <stdio.h>
 #include <string>
 #include <mysql/jdbc.h>
+#include <map>
+#include <list>
+
+#include "Film.hpp"
 
 class MysqlConnector{
 private:
@@ -20,7 +24,10 @@ private:
 public:
     MysqlConnector(std::string url, std::string username, std::string password, std::string database);
     ~MysqlConnector();
+    
     std::string getUserPass(std::string username);
+    std::list<Film*> loadAllFilm();
+    //std::map<int, std::list<Film*>> loadSeries();
     
     
     void printAllFilm();
