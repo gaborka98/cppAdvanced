@@ -7,37 +7,15 @@
 //
 
 #include <iostream>
-#include <mysql/jdbc.h>
+#include "mysqlConnector.hpp"
 
 
 using namespace std;
 
 int main(int argc, const char * argv[]) {
+    MysqlConnector *mysql = new MysqlConnector("mysql://127.0.0.1:3306", "root", "Gaborka11", "cpp");
+    mysql->printAllFilm();
     
-    try {
-        sql::Driver *driver;
-        sql::Connection *conn;
-        sql::Statement *stmt;
-        sql::ResultSet *rs;
-        
-        driver = sql::mysql::get_driver_instance();
-        conn = driver->connect("tcp://gaborka98.mooo.com:3306", "projekt", "projekt123");
-        conn->setSchema("cpp");
-        
-        stmt = conn->createStatement();
-        rs = stmt->executeQuery("SELECT Title, Category FROM Films");
-        
-        while (rs->next()) {
-            cout<< rs->getString("Title") << "\t" << rs->getString("Category") << endl;
-        }
-        
-        
-        delete conn;
-        delete stmt;
-        delete rs;
-    } catch (sql::SQLException &e) {
-        cerr << e.what() << endl;
-    }
     
     
     
