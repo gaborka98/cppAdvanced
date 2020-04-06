@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		ED794E5E2433D2EB0039066B /* mysqlConnector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED794E5C2433D2EB0039066B /* mysqlConnector.cpp */; };
 		EDF198CE24334568005BF25D /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDF198CD24334568005BF25D /* main.cpp */; };
 /* End PBXBuildFile section */
 
@@ -23,6 +24,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		ED794E5C2433D2EB0039066B /* mysqlConnector.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = mysqlConnector.cpp; sourceTree = "<group>"; };
+		ED794E5D2433D2EB0039066B /* mysqlConnector.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = mysqlConnector.hpp; sourceTree = "<group>"; };
 		EDF198CA24334568005BF25D /* cppAdvanced */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = cppAdvanced; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDF198CD24334568005BF25D /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -58,6 +61,8 @@
 			isa = PBXGroup;
 			children = (
 				EDF198CD24334568005BF25D /* main.cpp */,
+				ED794E5C2433D2EB0039066B /* mysqlConnector.cpp */,
+				ED794E5D2433D2EB0039066B /* mysqlConnector.hpp */,
 			);
 			path = cppAdvanced;
 			sourceTree = "<group>";
@@ -119,6 +124,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED794E5E2433D2EB0039066B /* mysqlConnector.cpp in Sources */,
 				EDF198CE24334568005BF25D /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -238,6 +244,8 @@
 		EDF198D224334568005BF25D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4Z2C9DLGR5;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -255,6 +263,8 @@
 		EDF198D324334568005BF25D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4Z2C9DLGR5;
 				ENABLE_HARDENED_RUNTIME = YES;
