@@ -18,11 +18,12 @@
 
 class Series : public Film {
     std::map<int, std::list<Film*>> seasons;
-//    std::list<Film*> episodes;
     
 public:
-    Series(std::string title, std::string category, std::map<int, std::list<Film*>> seasons);
+    Series(std::string title, std::string originalTitle, std::string category, double score, int watched, int playTime, std::string audio, std::string subtitle, int likes, int dislikes);
     ~Series();
+    
+    void setSeasons(std::map<int, std::list<Film*>> seasons);
 };
 
 #endif /* Series_hpp */

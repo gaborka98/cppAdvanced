@@ -7,17 +7,15 @@
 //
 
 #include <iostream>
-#include "mysqlConnector.hpp"
+#include "MovieSystem.hpp"
 
 
 using namespace std;
 
 int main(int argc, const char * argv[]) {
-    MysqlConnector *mysql = new MysqlConnector("mysql://127.0.0.1:3306", "root", "Gaborka11", "cpp");
-    mysql->loadAllFilm();
+    MovieSystem database;
     
-    
-    
+    database.loadEverythingFromSql();
     
     return 0;
 }

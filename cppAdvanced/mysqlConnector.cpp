@@ -52,34 +52,25 @@ std::string MysqlConnector::getUserPass(std::string username) {
     return nullptr;
 }
 
-std::list<Film*> MysqlConnector::loadAllFilm() {
-    std::list<Film*> toReturn;
+void MysqlConnector::loadAllFilm(std::list<Film*> &movies) {
     try {
         sql::Statement *stmt = con->createStatement();
         sql::ResultSet *rs = stmt->executeQuery("SELECT * FROM Films WHERE Films.Title NOT REGEXP '.*E[0-9][0-9]'");
         while (rs->next()) {
-            toReturn.push_back(new Film(rs->getString("Title"), rs->getString("Category")));
-            std::cout << rs->getString("Title") << std::endl;
+            movies.push_back(new Film(rs->getString("Title"), rs->getString("Original_title"), rs->getString("Category"), rs->getDouble("Score"), rs->getInt("Watched"), rs->getInt("Lenght"), rs->getString("Audio"), rs->getString("Subtitle"), rs->getInt("Likes"), rs->getInt("Dislikes")));
+//            std::cout << rs->getString("Title") << std::endl;
         }
     } catch (sql::SQLException &e) {
         std::cerr << e.what() << std::endl;
         std::cerr << "Error code: " << e.getErrorCode() << std::endl;
         std::cerr << "Statement: " << e.getSQLState() << std::endl;
     }
-    return toReturn;
 }
 
-// TODO: MEGCSINALNI
-//std::map<int, std::list<Film*>> MysqlConnector::loadSeries() {
-//    try {
-//        sql::Statement *stmt = con->createStatement();
-//        sql::ResultSet *rs = stmt->executeQuery("SELECT ");
-//    } catch (sql::SQLException &e) {
-//        std::cerr << e.what() << std::endl;
-//        std::cerr << "Error code: " << e.getErrorCode() << std::endl;
-//        std::cerr << "Statement: " << e.getSQLState() << std::endl;
-//    }
-//}
+// TODO: loadAllSeries()!!!!!!
+void MysqlConnector::loadAllSeries(std::list<Film*> &movies){
+    // navicatben sql serveren ket select mar megvan irva levalogatashoz
+}
 
 void MysqlConnector::printAllFilm() {
     try {

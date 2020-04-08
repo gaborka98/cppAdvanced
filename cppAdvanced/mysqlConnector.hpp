@@ -16,6 +16,7 @@
 #include <list>
 
 #include "Film.hpp"
+#include "Series.hpp"
 
 class MysqlConnector{
 private:
@@ -26,9 +27,8 @@ public:
     ~MysqlConnector();
     
     std::string getUserPass(std::string username);
-    std::list<Film*> loadAllFilm();
-    //std::map<int, std::list<Film*>> loadSeries();
-    
+    void loadAllFilm(std::list<Film*> &);
+    void loadAllSeries(std::list<Film*> &);
     
     void printAllFilm();
     
