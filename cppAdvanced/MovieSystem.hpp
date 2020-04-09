@@ -18,7 +18,7 @@
 class MovieSystem {
 private:
     std::list<Film*> movies;
-    MysqlConnector *mysql = new MysqlConnector("mysql://127.0.0.1:3306", "root", "Gaborka11", "cpp");
+    MysqlConnector *mysql = new MysqlConnector("mysql://127.0.0.1:3306", "root", "asd123asd123", "cpp");
 public:
     MovieSystem();
     ~MovieSystem();

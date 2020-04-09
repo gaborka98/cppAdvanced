@@ -28,6 +28,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		038F123F243F2F620029F1F9 /* cppAdvanced.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = cppAdvanced.entitlements; sourceTree = "<group>"; };
 		ED091D57243B0F3F00B002D1 /* User.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = User.cpp; sourceTree = "<group>"; };
 		ED091D58243B0F3F00B002D1 /* User.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = User.hpp; sourceTree = "<group>"; };
 		ED091D5A243B101300B002D1 /* Film.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Film.cpp; sourceTree = "<group>"; };
@@ -72,6 +73,7 @@
 		EDF198CC24334568005BF25D /* cppAdvanced */ = {
 			isa = PBXGroup;
 			children = (
+				038F123F243F2F620029F1F9 /* cppAdvanced.entitlements */,
 				EDF198CD24334568005BF25D /* main.cpp */,
 				EDB7D832243E6A3600BE7BA2 /* MovieSystem.cpp */,
 				EDB7D833243E6A3600BE7BA2 /* MovieSystem.hpp */,
@@ -270,8 +272,10 @@
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CLANG_CXX_LIBRARY = "libc++";
+				CODE_SIGN_ENTITLEMENTS = cppAdvanced/cppAdvanced.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 4Z2C9DLGR5;
+				DEVELOPMENT_TEAM = AF6SS5FZXF;
 				ENABLE_HARDENED_RUNTIME = YES;
 				HEADER_SEARCH_PATHS = (
 					"/usr/local/mysql-connector-c++-8.0.19/include",
@@ -289,8 +293,10 @@
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CLANG_CXX_LIBRARY = "libc++";
+				CODE_SIGN_ENTITLEMENTS = cppAdvanced/cppAdvanced.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 4Z2C9DLGR5;
+				DEVELOPMENT_TEAM = AF6SS5FZXF;
 				ENABLE_HARDENED_RUNTIME = YES;
 				HEADER_SEARCH_PATHS = (
 					"/usr/local/mysql-connector-c++-8.0.19/include",
