@@ -14,16 +14,17 @@
 #include <map>
 #include <list>
 
+#include "Node.hpp"
 #include "Film.hpp"
 
-class Series : public Film {
+class Series : public Node {
     std::map<int, std::list<Film*>> seasons;
     
 public:
-    Series(std::string title, std::string originalTitle, std::string category, double score, int watched, int playTime, std::string audio, std::string subtitle, int likes, int dislikes);
+    Series(std::string title, std::string originalTitle, std::string category, double score, int watched, int playTime, std::string audio, std::string subtitle, int likes, int dislikes, std::map<int, std::list<Film*>> seasons);
     ~Series();
     
-    void setSeasons(std::map<int, std::list<Film*>> seasons);
+    std::map<int, std::list<Film*>> getSeasons();
 };
 
 #endif /* Series_hpp */

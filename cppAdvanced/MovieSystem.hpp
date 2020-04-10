@@ -17,15 +17,18 @@
 
 class MovieSystem {
 private:
-    std::list<Film*> movies;
+    std::list<Node*> movies;
     MysqlConnector *mysql = new MysqlConnector("mysql://127.0.0.1:3306", "root", "Gaborka11", "cpp");
 public:
     MovieSystem();
     ~MovieSystem();
     
-    void setMovies(std::list<Film*> pMovies);
+    void setMovies(std::list<Node*> pMovies);
     
     void loadEverythingFromSql();
+    
+    void printAllWhatIsLoad();
+    void printAllSeriesEpisodes();
 };
 
 #endif /* movieSystem_hpp */

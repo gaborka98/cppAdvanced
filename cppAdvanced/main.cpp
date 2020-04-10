@@ -17,5 +17,8 @@ int main(int argc, const char * argv[]) {
     
     database.loadEverythingFromSql();
     
+//    database.printAllWhatIsLoad();
+    database.printAllSeriesEpisodes();
+    
     return 0;
 }
