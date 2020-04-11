@@ -16,3 +16,8 @@ std::string Node::getTitle() {
     return title;
 }
 
+std::string Node::getOriginalTitle() { return originalTitle; }
+
+void Node::print() {
+    std::cout<< title << std::endl;
+}

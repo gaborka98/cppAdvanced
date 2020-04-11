@@ -21,19 +21,6 @@ void MovieSystem::loadEverythingFromSql() {
 
 void MovieSystem::printAllWhatIsLoad() {
     for (auto &iter : movies) {
-        std::cout << iter->getTitle()<< std::endl;
-    }
-}
-
-void MovieSystem::printAllSeriesEpisodes() {
-    for (auto &iter : movies) {
-        if (Series* castedIter = dynamic_cast<Series*>(iter)) {
-            for (auto &d : castedIter->getSeasons()) {
-                std::cout << d.first << ". evad:" << std::endl;;
-                for (auto &&asd : d.second) {
-                    std::cout << "\t" << asd->getTitle() << std::endl;
-                }
-            }
-        }
+        iter->print();
     }
 }

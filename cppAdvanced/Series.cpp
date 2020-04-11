@@ -25,3 +25,13 @@ Series::~Series() {
 
 std::map<int, std::list<Film*>> Series::getSeasons() { return seasons; }
 
+void Series::print() {
+    std::cout << getOriginalTitle() << std::endl;
+    for (auto &iter : seasons) {
+        std::cout << "\t" << iter.first << ". evad" << std::endl;
+        for (auto &d : iter.second) {
+            std::cout << "\t\t" << d->getTitle() << std::endl;
+        }
+    }
+}
+

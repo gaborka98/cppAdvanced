@@ -72,8 +72,14 @@ void MysqlConnector::loadAllSeries(std::list<Node*> &movies){
     delete rs;
     
     // Levalogatott sorozatok epizodjanak betoltese
-    sql::PreparedStatement *prepstmt = con->prepareStatement("SELECT * FROM Films WHERE Original_title = ?");
+    sql::PreparedStatement *prepstmt = con->prepareStatement("SELECT * FROM Films WHERE Original_title = ? ORDER BY Title");
+    
+    
     std::map<int, std::list<Film*>> seasonsForSeriesClass;
+    std::regex reg("S[0-9][0-9]E[0-9][0-9]");
+    std::smatch match;
+    int seasonNumber = 0, episodeNumber = 0, prevSeasonNumber = 1;
+    std::list<Film*> episodes;
     
     for (std::string &iter : seriesToLoad) {
         // TODO: tokenizalni a sorozatok reszeit
@@ -82,20 +88,12 @@ void MysqlConnector::loadAllSeries(std::list<Node*> &movies){
         rs = prepstmt->executeQuery();
         
         // Evad szamanak kinyerese
-        std::regex reg("S[0-9][0-9]E[0-9[0-9]]");
-        std::smatch match;
-        
-        int seasonNumber = -1, episodeNumber = -1;
-        
-        std::list<Film*> episodes;
-        
         std::string title, originalTitle, category, audio, subtitle;
         int watched = 0, likes = 0, dislikes = 0, playtime = 0;
         double score = 0;
         
         while (rs->next()) {
-            int previusSeasionNumber;
-            
+            std::string cuttedTitle;
             title = rs->getString("Title");
             originalTitle = rs->getString("Original_title");
             category = rs->getString("Category");
@@ -110,18 +108,28 @@ void MysqlConnector::loadAllSeries(std::list<Node*> &movies){
             if (std::regex_search(title, match, reg)) {
                 seasonNumber = std::stoi(title.substr(match.position() + 1, 2));
                 episodeNumber = std::stoi(title.substr(match.position() + 4, 2));
+                cuttedTitle = title.erase(match.position(),3);
             }
-            if (seasonNumber != previusSeasionNumber) {
-                seasonsForSeriesClass.insert(std::make_pair(previusSeasionNumber, episodes));
-            } else {episodes.push_back(new Film(title,originalTitle,category,score,watched,playtime,audio,subtitle,likes,dislikes));}
-            previusSeasionNumber = seasonNumber;
+            if (seasonNumber != prevSeasonNumber) {
+                seasonsForSeriesClass.insert(std::make_pair(prevSeasonNumber, episodes));
+                episodes.clear();
+                episodes.push_back(new Film(cuttedTitle, originalTitle, category, score, watched, playtime, audio,subtitle, likes, dislikes));
+            } else {
+                episodes.push_back(new Film(cuttedTitle,originalTitle,category,score,watched,playtime,audio,subtitle,likes,dislikes));
+            }
+            
+            if (rs->isLast()) {
+                seasonsForSeriesClass.insert(std::make_pair(seasonNumber, episodes));
+            }
+            
+            prevSeasonNumber = seasonNumber;
         }
-        
-        seasonsForSeriesClass.insert(std::make_pair(seasonNumber, episodes));
-        
         movies.push_back(new Series(originalTitle, originalTitle, category, score, watched, playtime, audio, subtitle, likes, dislikes, seasonsForSeriesClass));
-        delete rs;
     }
+//    delete rs;
+//    delete prepstmt;
+//    episodes.clear();
+//    seasonsForSeriesClass.clear();
 }
 
 void MysqlConnector::printAllFilm() {

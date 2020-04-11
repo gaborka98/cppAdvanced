@@ -20,6 +20,7 @@ class Film : public Node {
 public:
     Film(std::string title, std::string originalTitle, std::string category, double score, int watched, int playTime, std::string audio, std::string subtitle, int likes, int disLikes);
     ~Film();
+    
 };
 
 #endif /* Film_hpp */

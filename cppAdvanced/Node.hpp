@@ -11,6 +11,7 @@
 
 #include <stdio.h>
 #include <string>
+#include <iostream>
 
 class Node {
     std::string title;
@@ -29,6 +30,9 @@ public:
     virtual ~Node() = 0;
     
     std::string getTitle();
+    std::string getOriginalTitle();
+    
+    virtual void print();
 };
 
 #endif /* Node_hpp */
