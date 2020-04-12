@@ -18,14 +18,16 @@
 class MovieSystem {
 private:
     std::list<Node*> movies;
-    MysqlConnector *mysql = new MysqlConnector("mysql://127.0.0.1:3306", "root", "Gaborka11", "cpp");
+    MysqlConnector *mysql;
 public:
-    MovieSystem();
+    MovieSystem(MysqlConnector* &mysql);
     ~MovieSystem();
     
     void setMovies(std::list<Node*> pMovies);
     
     void loadEverythingFromSql();
+    
+    std::list<Node*> searchInLocalDatabase(std::string);
     
     void printAllWhatIsLoad();
     void printAllSeriesEpisodes();

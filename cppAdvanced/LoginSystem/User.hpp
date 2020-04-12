@@ -17,12 +17,12 @@
 
 class User {
     std::string name;
+    std::string username;
     std::string email;
     std::string password;
-    std::list<Film*> watched;
     
 public:
-    User(std::string name, std::string email, std::string password, std::list<Film*> films);
+    User(std::string name, std::string username, std::string email, std::string password);
     ~User();
 };
 

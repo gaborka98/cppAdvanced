@@ -18,6 +18,7 @@
 
 #include "Film.hpp"
 #include "Series.hpp"
+#include "User.hpp"
 
 class MysqlConnector{
 private:
@@ -29,9 +30,14 @@ public:
     MysqlConnector(std::string url, std::string username, std::string password, std::string database);
     ~MysqlConnector();
     
+    // LoginSystem
     std::string getUserPass(std::string username);
+    User* loadUserData(std::string username);
+    
+    // MovieSystem
     void loadAllFilm(std::list<Node*> &);
     void loadAllSeries(std::list<Node*> &);
+    std::list<Node*> searchFilms(std::string title);
     
     void printAllFilm();
     

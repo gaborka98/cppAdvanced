@@ -28,13 +28,15 @@ MysqlConnector::MysqlConnector(std::string url, std::string username, std::strin
 MysqlConnector::~MysqlConnector(){
     delete con;
     delete driver;
+    delete stmt;
+    delete rs;
 }
 
 std::string MysqlConnector::getUserPass(std::string username) {
     std::string password;
     
     try{
-        rs = stmt->executeQuery("SELECT Password FROM Users WHERE Username=" + username);
+        rs = stmt->executeQuery("SELECT Password FROM Users WHERE Username = '" + username + "'");
     while (rs->next()) {
         password = rs->getString("Password");
     }
@@ -48,28 +50,52 @@ std::string MysqlConnector::getUserPass(std::string username) {
     return nullptr;
 }
 
+User* MysqlConnector::loadUserData(std::string username) {
+
+    try {
+        rs = stmt->executeQuery("SELECT * FROM Users WHERE Username = '" + username + "'");
+        
+        while (rs->next()) {
+            return new User(rs->getString("Real_name"), rs->getString("Username"), rs->getString("email"), rs->getString("password"));
+        }
+        
+
+    } catch (sql::SQLException &e) {
+        std::cerr << e.what() << std::endl;
+        std::cerr << "Error code: " << e.getErrorCode() << std::endl;
+        std::cerr << "Statement: " << e.getSQLState() << std::endl;
+    }
+    return nullptr;
+}
+
 void MysqlConnector::loadAllFilm(std::list<Node*> &movies) {
     try {
         rs = stmt->executeQuery("SELECT * FROM Films WHERE Films.Title NOT REGEXP 'E[0-9][0-9]'");
         while (rs->next()) {
             movies.push_back(new Film(rs->getString("Title"), rs->getString("Original_title"), rs->getString("Category"), rs->getDouble("Score"), rs->getInt("Watched"), rs->getInt("Lenght"), rs->getString("Audio"), rs->getString("Subtitle"), rs->getInt("Likes"), rs->getInt("Dislikes")));
         }
-        delete rs;
     } catch (sql::SQLException &e) {
         std::cerr << e.what() << std::endl;
         std::cerr << "Error code: " << e.getErrorCode() << std::endl;
         std::cerr << "Statement: " << e.getSQLState() << std::endl;
     }
+    delete rs;
 }
 
 void MysqlConnector::loadAllSeries(std::list<Node*> &movies){
     // levalogatja a sorozatokat majd elmenti egy listaban
-    rs = stmt->executeQuery("SELECT Original_title FROM Films WHERE Title REGEXP 'S[0-9][0-9]E[0-9][0-9]' GROUP BY Original_title");
     std::list<std::string> seriesToLoad;
+    try {
+    rs = stmt->executeQuery("SELECT Original_title FROM Films WHERE Title REGEXP 'S[0-9][0-9]E[0-9][0-9]' GROUP BY Original_title");
     while (rs->next()) {
         seriesToLoad.push_back(rs->getString("Original_title"));
     }
     delete rs;
+    } catch(sql::SQLException &e) {
+        std::cerr << e.what() << std::endl;
+        std::cerr << "Error code: " << e.getErrorCode() << std::endl;
+        std::cerr << "Statement: " << e.getSQLState() << std::endl;
+    }
     
     // Levalogatott sorozatok epizodjanak betoltese
     sql::PreparedStatement *prepstmt = con->prepareStatement("SELECT * FROM Films WHERE Original_title = ? ORDER BY Title");
@@ -85,65 +111,60 @@ void MysqlConnector::loadAllSeries(std::list<Node*> &movies){
         // TODO: tokenizalni a sorozatok reszeit
         
         prepstmt->setString(1, iter);
-        rs = prepstmt->executeQuery();
         
-        // Evad szamanak kinyerese
         std::string title, originalTitle, category, audio, subtitle;
         int watched = 0, likes = 0, dislikes = 0, playtime = 0;
         double score = 0;
         
-        while (rs->next()) {
-            std::string cuttedTitle;
-            title = rs->getString("Title");
-            originalTitle = rs->getString("Original_title");
-            category = rs->getString("Category");
-            score = rs->getDouble("Score");
-            watched = rs->getInt("Watched");
-            playtime = rs->getInt("Lenght");
-            audio = rs->getString("Audio");
-            subtitle = rs->getString("Subtitle");
-            likes = rs->getInt("Likes");
-            dislikes = rs->getInt("Dislikes");
-            
-            if (std::regex_search(title, match, reg)) {
-                seasonNumber = std::stoi(title.substr(match.position() + 1, 2));
-                episodeNumber = std::stoi(title.substr(match.position() + 4, 2));
-                cuttedTitle = title.erase(match.position(),3);
+        try {
+            rs = prepstmt->executeQuery();
+        
+            // Evad szamanak kinyerese
+        
+            while (rs->next()) {
+                std::string cuttedTitle;
+                title = rs->getString("Title");
+                originalTitle = rs->getString("Original_title");
+                category = rs->getString("Category");
+                score = rs->getDouble("Score");
+                watched = rs->getInt("Watched");
+                playtime = rs->getInt("Lenght");
+                audio = rs->getString("Audio");
+                subtitle = rs->getString("Subtitle");
+                likes = rs->getInt("Likes");
+                dislikes = rs->getInt("Dislikes");
+                
+                if (std::regex_search(title, match, reg)) {
+                    seasonNumber = std::stoi(title.substr(match.position() + 1, 2));
+                    episodeNumber = std::stoi(title.substr(match.position() + 4, 2));
+                    cuttedTitle = title.erase(match.position(),3);
+                }
+                if (seasonNumber != prevSeasonNumber) {
+                    seasonsForSeriesClass.insert(std::make_pair(prevSeasonNumber, episodes));
+                    episodes.clear();
+                    episodes.push_back(new Film(cuttedTitle, originalTitle, category, score, watched, playtime, audio,subtitle, likes, dislikes));
+                } else {
+                    episodes.push_back(new Film(cuttedTitle,originalTitle,category,score,watched,playtime,audio,subtitle,likes,dislikes));
+                }
+                
+                if (rs->isLast()) {
+                    seasonsForSeriesClass.insert(std::make_pair(seasonNumber, episodes));
+                }
+                
+                prevSeasonNumber = seasonNumber;
             }
-            if (seasonNumber != prevSeasonNumber) {
-                seasonsForSeriesClass.insert(std::make_pair(prevSeasonNumber, episodes));
-                episodes.clear();
-                episodes.push_back(new Film(cuttedTitle, originalTitle, category, score, watched, playtime, audio,subtitle, likes, dislikes));
-            } else {
-                episodes.push_back(new Film(cuttedTitle,originalTitle,category,score,watched,playtime,audio,subtitle,likes,dislikes));
-            }
-            
-            if (rs->isLast()) {
-                seasonsForSeriesClass.insert(std::make_pair(seasonNumber, episodes));
-            }
-            
-            prevSeasonNumber = seasonNumber;
+        }catch (sql::SQLException &e) {
+            std::cerr << e.what() << std::endl;
+            std::cerr << "Error code: " << e.getErrorCode() << std::endl;
+            std::cerr << "Statement: " << e.getSQLState() << std::endl;
         }
+        
         movies.push_back(new Series(originalTitle, originalTitle, category, score, watched, playtime, audio, subtitle, likes, dislikes, seasonsForSeriesClass));
     }
-//    delete rs;
-//    delete prepstmt;
-//    episodes.clear();
-//    seasonsForSeriesClass.clear();
-}
-
-void MysqlConnector::printAllFilm() {
-    try {
-        sql::Statement *stmt = con->createStatement();
-        sql::ResultSet *rs = stmt->executeQuery("SELECT Title, Category FROM Films");
-        while (rs->next()) {
-            std::cout << rs->getString("Title") << "\t\t" << rs->getString("Category") << std::endl;
-        }
-    } catch (sql::SQLException &e) {
-        std::cerr << e.what() << std::endl;
-        std::cerr << "Error code: " << e.getErrorCode() << std::endl;
-        std::cerr << "Statement: " << e.getSQLState() << std::endl;
-    }
+    delete rs;
+    delete prepstmt;
+    episodes.clear();
+    seasonsForSeriesClass.clear();
 }
 
 
