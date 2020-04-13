@@ -11,10 +11,10 @@
 		ED091D5C243B101300B002D1 /* Film.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED091D5A243B101300B002D1 /* Film.cpp */; };
 		ED091D5F243B120400B002D1 /* Series.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED091D5D243B120400B002D1 /* Series.cpp */; };
 		ED116F95244058BA007F7EC1 /* Node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED116F93244058BA007F7EC1 /* Node.cpp */; };
-		ED2E3410244318E5002B7C65 /* menuSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED2E340E244318E5002B7C65 /* menuSystem.cpp */; };
 		ED794E5E2433D2EB0039066B /* mysqlConnector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ED794E5C2433D2EB0039066B /* mysqlConnector.cpp */; };
 		EDB7D834243E6A3600BE7BA2 /* MovieSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDB7D832243E6A3600BE7BA2 /* MovieSystem.cpp */; };
-		EDD391BA2442410A00EEB9CA /* Login.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDD391B92442410A00EEB9CA /* Login.cpp */; };
+		EDD814BE24437624004BA675 /* Login.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDD814BC24437624004BA675 /* Login.cpp */; };
+		EDD814C42443776F004BA675 /* menuSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDD814C22443776F004BA675 /* menuSystem.cpp */; };
 		EDF198CE24334568005BF25D /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EDF198CD24334568005BF25D /* main.cpp */; };
 /* End PBXBuildFile section */
 
@@ -40,12 +40,14 @@
 		ED091D5E243B120400B002D1 /* Series.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Series.hpp; sourceTree = "<group>"; };
 		ED116F93244058BA007F7EC1 /* Node.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Node.cpp; sourceTree = "<group>"; };
 		ED116F94244058BA007F7EC1 /* Node.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Node.hpp; sourceTree = "<group>"; };
-		ED2E340E244318E5002B7C65 /* menuSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = menuSystem.cpp; sourceTree = "<group>"; };
 		ED794E5C2433D2EB0039066B /* mysqlConnector.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = mysqlConnector.cpp; sourceTree = "<group>"; };
 		ED794E5D2433D2EB0039066B /* mysqlConnector.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = mysqlConnector.hpp; sourceTree = "<group>"; };
 		EDB7D832243E6A3600BE7BA2 /* MovieSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MovieSystem.cpp; sourceTree = "<group>"; };
 		EDB7D833243E6A3600BE7BA2 /* MovieSystem.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MovieSystem.hpp; sourceTree = "<group>"; };
-		EDD391B92442410A00EEB9CA /* Login.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Login.cpp; sourceTree = "<group>"; };
+		EDD814BC24437624004BA675 /* Login.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Login.cpp; sourceTree = "<group>"; };
+		EDD814BD24437624004BA675 /* Login.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Login.hpp; sourceTree = "<group>"; };
+		EDD814C22443776F004BA675 /* menuSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = menuSystem.cpp; sourceTree = "<group>"; };
+		EDD814C32443776F004BA675 /* menuSystem.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = menuSystem.hpp; sourceTree = "<group>"; };
 		EDF198CA24334568005BF25D /* cppAdvanced */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = cppAdvanced; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDF198CD24334568005BF25D /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -81,9 +83,19 @@
 			children = (
 				ED091D57243B0F3F00B002D1 /* User.cpp */,
 				ED091D58243B0F3F00B002D1 /* User.hpp */,
-				EDD391B92442410A00EEB9CA /* Login.cpp */,
+				EDD814BC24437624004BA675 /* Login.cpp */,
+				EDD814BD24437624004BA675 /* Login.hpp */,
 			);
 			path = LoginSystem;
+			sourceTree = "<group>";
+		};
+		EDD814C024437753004BA675 /* menuSystem */ = {
+			isa = PBXGroup;
+			children = (
+				EDD814C22443776F004BA675 /* menuSystem.cpp */,
+				EDD814C32443776F004BA675 /* menuSystem.hpp */,
+			);
+			path = menuSystem;
 			sourceTree = "<group>";
 		};
 		EDF198C124334568005BF25D = {
@@ -106,10 +118,10 @@
 			isa = PBXGroup;
 			children = (
 				038F123F243F2F620029F1F9 /* cppAdvanced.entitlements */,
+				EDD814C024437753004BA675 /* menuSystem */,
 				EDD391B82442407C00EEB9CA /* LoginSystem */,
 				EDD391B72442401600EEB9CA /* MovieSystem */,
 				EDF198CD24334568005BF25D /* main.cpp */,
-				ED2E340E244318E5002B7C65 /* menuSystem.cpp */,
 				ED794E5C2433D2EB0039066B /* mysqlConnector.cpp */,
 				ED794E5D2433D2EB0039066B /* mysqlConnector.hpp */,
 			);
@@ -175,13 +187,13 @@
 			files = (
 				ED091D59243B0F3F00B002D1 /* User.cpp in Sources */,
 				ED116F95244058BA007F7EC1 /* Node.cpp in Sources */,
+				EDD814BE24437624004BA675 /* Login.cpp in Sources */,
 				ED091D5C243B101300B002D1 /* Film.cpp in Sources */,
-				EDD391BA2442410A00EEB9CA /* Login.cpp in Sources */,
 				ED091D5F243B120400B002D1 /* Series.cpp in Sources */,
 				ED794E5E2433D2EB0039066B /* mysqlConnector.cpp in Sources */,
 				EDF198CE24334568005BF25D /* main.cpp in Sources */,
 				EDB7D834243E6A3600BE7BA2 /* MovieSystem.cpp in Sources */,
-				ED2E3410244318E5002B7C65 /* menuSystem.cpp in Sources */,
+				EDD814C42443776F004BA675 /* menuSystem.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

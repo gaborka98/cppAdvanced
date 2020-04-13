@@ -16,14 +16,17 @@
 #include "Film.hpp"
 
 class User {
+    int id;
     std::string name;
     std::string username;
     std::string email;
     std::string password;
     
 public:
-    User(std::string name, std::string username, std::string email, std::string password);
+    User(int id, std::string name, std::string username, std::string email, std::string password);
     ~User();
+    
+    int getId();
 };
 
 #endif /* User_hpp */

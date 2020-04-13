@@ -14,6 +14,7 @@
 #include <iostream>
 
 class Node {
+    int id;
     std::string title;
     std::string originalTitle;
     std::string category;
@@ -26,10 +27,11 @@ class Node {
     int disLikes;
     
 public:
-    Node(std::string title, std::string originalTitle, std::string category, double score, int watched, int playTime, std::string audio, std::string subtitle, int likes, int disLikes);
+    Node( int id, std::string title, std::string originalTitle, std::string category, double score, int watched, int playTime, std::string audio, std::string subtitle, int likes, int disLikes);
     virtual ~Node() = 0;
     
     std::string getTitle();
+    int getId();
     std::string getOriginalTitle();
     
     virtual void print();

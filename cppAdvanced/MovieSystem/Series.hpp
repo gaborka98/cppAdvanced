@@ -21,7 +21,7 @@ class Series : public Node {
     std::map<int, std::list<Film*>> seasons;
     
 public:
-    Series(std::string title, std::string originalTitle, std::string category, double score, int watched, int playTime, std::string audio, std::string subtitle, int likes, int dislikes, std::map<int, std::list<Film*>> seasons);
+    Series(int id, std::string title, std::string originalTitle, std::string category, double score, int watched, int playTime, std::string audio, std::string subtitle, int likes, int dislikes, std::map<int, std::list<Film*>> seasons);
     ~Series();
     
     std::map<int, std::list<Film*>> getSeasons();

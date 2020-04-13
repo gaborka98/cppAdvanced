@@ -38,6 +38,8 @@ public:
     void loadAllFilm(std::list<Node*> &);
     void loadAllSeries(std::list<Node*> &);
     std::list<Node*> searchFilms(std::string title);
+    void insertEvent(int typeId, int filmId, int userId, int score = -1);
+    void updateScore(int filmId);
     
     void printAllFilm();
     

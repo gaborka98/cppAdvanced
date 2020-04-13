@@ -9,7 +9,7 @@
 #include "Series.hpp"
 
 
-Series::Series(std::string title, std::string originalTitle, std::string category, double score, int watched, int playtime, std::string audio, std::string subtitle, int likes, int dislikes, std::map<int, std::list<Film*>> seasons) : Node(title, originalTitle, category, score, watched, playtime, audio, subtitle, likes, dislikes), seasons(seasons) {}
+Series::Series(int id, std::string title, std::string originalTitle, std::string category, double score, int watched, int playtime, std::string audio, std::string subtitle, int likes, int dislikes, std::map<int, std::list<Film*>> seasons) : Node(id, title, originalTitle, category, score, watched, playtime, audio, subtitle, likes, dislikes), seasons(seasons) {}
 
 
 

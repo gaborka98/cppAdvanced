@@ -14,7 +14,8 @@ MovieSystem::~MovieSystem() {}
 
 void MovieSystem::setMovies(std::list<Node*> pMovies) { movies = pMovies; }
 
-void MovieSystem::loadEverythingFromSql() {
+void MovieSystem::refreshDatabaseFromSql() {
+    movies.clear();
     mysql->loadAllFilm(movies);
     mysql->loadAllSeries(movies);
 }
@@ -25,8 +26,8 @@ void MovieSystem::printAllWhatIsLoad() {
     }
 }
 
-std::list<Node*> MovieSystem::searchInLocalDatabase(std::string title) {
-    std::list<Node*> toReturn;
+std::vector<Node*> MovieSystem::searchInLocalDatabase(std::string title) {
+    std::vector<Node*> toReturn;
     std::smatch match;
     
     for (Node* &iter : movies) {

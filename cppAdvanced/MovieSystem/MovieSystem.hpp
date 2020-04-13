@@ -25,9 +25,9 @@ public:
     
     void setMovies(std::list<Node*> pMovies);
     
-    void loadEverythingFromSql();
+    void refreshDatabaseFromSql();
     
-    std::list<Node*> searchInLocalDatabase(std::string);
+    std::vector<Node*> searchInLocalDatabase(std::string);
     
     void printAllWhatIsLoad();
     void printAllSeriesEpisodes();

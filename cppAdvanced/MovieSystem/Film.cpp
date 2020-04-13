@@ -9,6 +9,6 @@
 #include "Film.hpp"
 
 
-Film::Film(std::string title, std::string originalTitle, std::string category, double score, int watched, int playTime, std::string audio, std::string subtitle, int likes, int disLikes) : Node(title, originalTitle, category, score, watched, playTime, audio, subtitle, likes, disLikes) {}
+Film::Film(int id, std::string title, std::string originalTitle, std::string category, double score, int watched, int playTime, std::string audio, std::string subtitle, int likes, int disLikes) : Node(id, title, originalTitle, category, score, watched, playTime, audio, subtitle, likes, disLikes) {}
 
 Film::~Film() {}
