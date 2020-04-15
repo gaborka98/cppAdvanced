@@ -26,7 +26,7 @@ Series::~Series() {
 std::map<int, std::list<Film*>> Series::getSeasons() { return seasons; }
 
 void Series::print() {
-    std::cout << getOriginalTitle() << std::endl;
+    std::cout << originalTitle << std::endl;
     for (auto &iter : seasons) {
         std::cout << "\t" << iter.first << ". evad" << std::endl;
         for (auto &d : iter.second) {
@@ -35,3 +35,14 @@ void Series::print() {
     }
 }
 
+void Series::printDetails() {
+    std::cout << "Cim: " << originalTitle << std::endl;
+    std::cout << "Evadok szama: " << seasons.size();
+    std::cout << "Kategoria: " << category << std::endl;
+    std::cout << "Hossza: " << playTime << " perc" << std::endl;
+    std::cout << "Audio: " << audio << std::endl;
+    std::cout << "Felirat: " << subtitle << std::endl;
+    std::cout << "Pontszam: " << score << std::endl;
+    std::cout << "Like: " << likes << std::endl;
+    std::cout << "Dislikes: " << disLikes << std::endl;
+}

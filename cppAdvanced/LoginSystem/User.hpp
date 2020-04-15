@@ -11,9 +11,9 @@
 
 #include <stdio.h>
 #include <string>
-#include <list>
+#include <vector>
 
-#include "Film.hpp"
+#include "Node.hpp"
 
 class User {
     int id;
@@ -21,10 +21,13 @@ class User {
     std::string username;
     std::string email;
     std::string password;
+    std::vector<Node*> watched;
     
 public:
     User(int id, std::string name, std::string username, std::string email, std::string password);
     ~User();
+    
+    void addWatched(Node* movie);
     
     int getId();
 };

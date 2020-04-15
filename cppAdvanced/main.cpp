@@ -7,13 +7,13 @@
 //
 
 #include <iostream>
-#include "MovieSystem.hpp"
+#include "MovieSystem/MovieSystem.hpp"
 #include "mysqlConnector.hpp"
 #include "menuSystem.hpp"
 #include "LoginSystem/Login.hpp"
 
 int main(int argc, const char * argv[]) {
-    MysqlConnector* mysql = new MysqlConnector("mysql://127.0.0.1:3306", "root", "Gaborka11", "cpp");
+    MysqlConnector* mysql = new MysqlConnector();
     MovieSystem* database = new MovieSystem(mysql);
     User* loggedInUser = loginProcess(mysql);
     

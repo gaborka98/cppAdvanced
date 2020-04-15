@@ -14,5 +14,9 @@ User::User(int id, std::string name, std::string username,  std::string email, s
 User::~User() {
 }
 
+void User::addWatched(Node* movie) {
+    watched.push_back(movie);
+}
+
 int User::getId() { return id; }
 

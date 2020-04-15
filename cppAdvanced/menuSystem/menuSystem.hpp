@@ -11,6 +11,7 @@
 
 #include <stdio.h>
 #include <string>
+#include <iostream>
 
 #include "MovieSystem.hpp"
 #include "mysqlConnector.hpp"

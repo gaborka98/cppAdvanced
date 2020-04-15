@@ -28,6 +28,9 @@ public:
     void refreshDatabaseFromSql();
     
     std::vector<Node*> searchInLocalDatabase(std::string);
+    void deleteFromLocalDatabase(Node* selected);
+    void addFilm(int id, std::string title, std::string originalTitle, std::string category, double score, int watched, int playTime, std::string audio, std::string subtitle, int likes, int dislikes);
+    void addSeries(int id, std::string title, std::string originalTitle, std::string category, double score, int watched, int playTime, std::string audio, std::string subtitle, int likes, int dislikes, std::map<int, std::list<Film*>> seasons);
     
     void printAllWhatIsLoad();
     void printAllSeriesEpisodes();

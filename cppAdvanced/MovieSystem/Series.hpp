@@ -27,6 +27,7 @@ public:
     std::map<int, std::list<Film*>> getSeasons();
     
     void print();
+    void printDetails();
 };
 
 #endif /* Series_hpp */

@@ -16,6 +16,7 @@
 #include <list>
 #include <regex>
 
+#include "secrets.hpp"
 #include "Film.hpp"
 #include "Series.hpp"
 #include "User.hpp"
@@ -27,7 +28,7 @@ private:
     sql::Statement *stmt;
     sql::ResultSet *rs;
 public:
-    MysqlConnector(std::string url, std::string username, std::string password, std::string database);
+    MysqlConnector();
     ~MysqlConnector();
     
     // LoginSystem
@@ -40,6 +41,10 @@ public:
     std::list<Node*> searchFilms(std::string title);
     void insertEvent(int typeId, int filmId, int userId, int score = -1);
     void updateScore(int filmId);
+    int addToDatabase(std::string title, std::string originalTitle, std::string category, int playTime, std::string audio, std::string subtitle);
+    
+    int getLastId();
+    void deleteFromDatabase(int filmId);
     
     void printAllFilm();
     

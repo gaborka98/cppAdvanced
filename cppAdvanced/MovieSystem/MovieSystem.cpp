@@ -46,3 +46,15 @@ std::vector<Node*> MovieSystem::searchInLocalDatabase(std::string title) {
     }
     return toReturn;
 }
+
+void MovieSystem::deleteFromLocalDatabase(Node* selected) {
+    movies.remove(selected);
+    delete selected;
+}
+
+void MovieSystem::addFilm(int id, std::string title, std::string originalTitle, std::string category, double score, int watched, int playTime, std::string audio, std::string subtitle, int likes, int dislikes) {
+    movies.push_back(new Film(id, title, originalTitle, category, score, watched, playTime, audio, subtitle, likes, dislikes));
+}
+void MovieSystem::addSeries(int id, std::string title, std::string originalTitle, std::string category, double score, int watched, int playTime, std::string audio, std::string subtitle, int likes, int dislikes, std::map<int, std::list<Film*>> seasons) {
+    movies.push_back(new Series(id,title,originalTitle,category,score,watched,playTime,audio,subtitle,likes,dislikes, seasons));
+}

@@ -42,6 +42,7 @@
 		ED116F94244058BA007F7EC1 /* Node.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Node.hpp; sourceTree = "<group>"; };
 		ED794E5C2433D2EB0039066B /* mysqlConnector.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = mysqlConnector.cpp; sourceTree = "<group>"; };
 		ED794E5D2433D2EB0039066B /* mysqlConnector.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = mysqlConnector.hpp; sourceTree = "<group>"; };
+		EDACBF5F2447930900508693 /* secrets.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = secrets.hpp; path = cppAdvanced/secrets.hpp; sourceTree = SOURCE_ROOT; };
 		EDB7D832243E6A3600BE7BA2 /* MovieSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MovieSystem.cpp; sourceTree = "<group>"; };
 		EDB7D833243E6A3600BE7BA2 /* MovieSystem.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MovieSystem.hpp; sourceTree = "<group>"; };
 		EDD814BC24437624004BA675 /* Login.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Login.cpp; sourceTree = "<group>"; };
@@ -122,6 +123,7 @@
 				EDD391B82442407C00EEB9CA /* LoginSystem */,
 				EDD391B72442401600EEB9CA /* MovieSystem */,
 				EDF198CD24334568005BF25D /* main.cpp */,
+				EDACBF5F2447930900508693 /* secrets.hpp */,
 				ED794E5C2433D2EB0039066B /* mysqlConnector.cpp */,
 				ED794E5D2433D2EB0039066B /* mysqlConnector.hpp */,
 			);
@@ -325,6 +327,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "/usr/local/mysql-connector-c++-8.0.19/lib64";
 				LIBRARY_SEARCH_PATHS = "/usr/local/mysql-connector-c++-8.0.19/lib64";
 				OTHER_LDFLAGS = "-lmysqlcppconn";
+				PRODUCT_BUNDLE_IDENTIFIER = me.Agronaut;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -346,6 +349,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "/usr/local/mysql-connector-c++-8.0.19/lib64";
 				LIBRARY_SEARCH_PATHS = "/usr/local/mysql-connector-c++-8.0.19/lib64";
 				OTHER_LDFLAGS = "-lmysqlcppconn";
+				PRODUCT_BUNDLE_IDENTIFIER = me.Agronaut;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
