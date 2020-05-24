@@ -17,11 +17,13 @@ int main(int argc, const char * argv[]) {
     MovieSystem* database = new MovieSystem(mysql);
     User* loggedInUser = loginProcess(mysql);
     
+    mysql->loadWatchedMovies(loggedInUser);
     database->refreshDatabaseFromSql();
 //    database->printAllWhatIsLoad();
     
     printMenu(database, mysql, loggedInUser);
     
+    std::cout << "Kilepes..." << std::endl;
     
     return 0;
 }

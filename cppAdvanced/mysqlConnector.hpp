@@ -38,10 +38,16 @@ public:
     // MovieSystem
     void loadAllFilm(std::list<Node*> &);
     void loadAllSeries(std::list<Node*> &);
+    void loadWatchedMovies(User* loginUser);
+    
     std::list<Node*> searchFilms(std::string title);
     void insertEvent(int typeId, int filmId, int userId, int score = -1);
     void updateScore(int filmId);
+    void updateWatched(int filmId);
+    void updateLikes(int filmId);
+    void updateDislikes(int filmId);
     int addToDatabase(std::string title, std::string originalTitle, std::string category, int playTime, std::string audio, std::string subtitle);
+    std::vector<std::string> selectMaxWatchedCategoryForRandomSelect(User* loginUser);
     
     int getLastId();
     void deleteFromDatabase(int filmId);

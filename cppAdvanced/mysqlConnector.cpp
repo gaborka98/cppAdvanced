@@ -170,7 +170,6 @@ void MysqlConnector::loadAllSeries(std::list<Node*> &movies){
 
 void MysqlConnector::insertEvent(int typeId, int filmId, int userId, int score) {
     sql::PreparedStatement *prepstmt = con->prepareStatement("INSERT INTO film_events (Type_id, Film_id, User_id, Score) VALUES (?, ?, ?, ?)");
-    sql::PreparedStatement *preprocess = con->prepareStatement("SELECT * FROM film_events WHERE Film_id = ? AND User_id = ? AND Type_id = ?");
     prepstmt->setInt(1, typeId);
     prepstmt->setInt(2, filmId);
     prepstmt->setInt(3, userId);
@@ -178,20 +177,8 @@ void MysqlConnector::insertEvent(int typeId, int filmId, int userId, int score) 
         prepstmt->setNull(4, 0);
     } else { prepstmt->setInt(4, score); }
     
-    preprocess->setInt(1, filmId);
-    preprocess->setInt(2, userId);
-    preprocess->setInt(3, typeId);
-    
     try {
-        rs = preprocess->executeQuery();
-        
-        if (rs->rowsCount() != 0) {
-            std::cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << std::endl;
-            std::cout << "Te ezt mar megtetted korabban, kerlek ne ismeteld onmagad." << std::endl;
-            std::cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << std::endl;
-            return;
-        }
-        int res = prepstmt->execute();
+        int res = prepstmt->executeUpdate();
         std::cout << (res ? "A muvelet sikeresen vegrehajtva." : "Valami hiba tortent.") << std::endl;
     } catch (sql::SQLException &e) {
         std::cerr << e.what() << std::endl;
@@ -263,8 +250,51 @@ int MysqlConnector::addToDatabase(std::string title, std::string originalTitle, 
     return rs->getInt("ID");
 }
 
+std::vector<std::string> MysqlConnector::selectMaxWatchedCategoryForRandomSelect(User* loginUser) {
+    std::vector<std::string> toReturn;
+    std::string category = "";
+    sql::PreparedStatement *prep = con->prepareStatement("SELECT count( `films`.`Category` ) AS `Count`, `films`.`Category` AS `Category` FROM ( `film_events` JOIN `films` ON (( `film_events`.`Film_id` = `films`.`ID` ))) WHERE ( `film_events`.`Type_id` = ? AND `film_events`.`User_id` = ? ) GROUP BY `films`.`Category` ORDER BY `Count`");
+    prep->setInt(1, 3);
+    prep->setInt(2, loginUser->getId());
+    rs = prep->executeQuery();
+    
+    while (rs->next()) {
+        category = rs->getString("Category");
+    }
+    std::cout << category << std::endl;
+    
+    rs = stmt->executeQuery("SELECT Title FROM films WHERE Category = '" + category + "'");
+    while (rs->next()) {
+        toReturn.push_back(rs->getString("Title"));
+    }
+    return toReturn;
+}
+
+void MysqlConnector::updateWatched(int filmId) {
+    int watchCount = 0;
+    rs = stmt->executeQuery("SELECT COUNT( film_events.ID ) AS `Watched` FROM film_events WHERE film_events.Type_id = 3 AND film_events.Film_id = 5");
+    while (rs->next()) {
+        watchCount = rs->getInt("Watched");
+    }
+    stmt->executeUpdate("UPDATE Films SET Watched = " + std::to_string(watchCount) + " WHERE ID = " + std::to_string(filmId));
+}
+
 int MysqlConnector::getLastId() {
     rs = stmt->executeQuery("SELECT IDENT_CURRENT('films') AS ID");
     rs->next();
     return rs->getInt("ID");
 }
+
+void MysqlConnector::loadWatchedMovies(User* loginUser) {
+    // TODO: definialni
+}
+
+void MysqlConnector::updateLikes(int filmId) {
+    // TODO:definialni
+}
+
+
+void MysqlConnector::updateDislikes(int filmId) {
+    // TODO: definialni
+}
+

@@ -18,5 +18,14 @@ void User::addWatched(Node* movie) {
     watched.push_back(movie);
 }
 
+bool User::notContainsWatched(Node* movie) {
+    for (auto &iter : watched) {
+        if (iter == movie) {
+            return false;
+        }
+    }
+    return true;
+}
+
 int User::getId() { return id; }
 

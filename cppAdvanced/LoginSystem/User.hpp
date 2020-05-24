@@ -28,6 +28,7 @@ public:
     ~User();
     
     void addWatched(Node* movie);
+    bool notContainsWatched(Node* movie);
     
     int getId();
 };

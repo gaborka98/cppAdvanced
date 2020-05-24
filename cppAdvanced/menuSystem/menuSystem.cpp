@@ -7,6 +7,8 @@
 //
 
 #include "menuSystem.hpp"
+#include <ctime>
+#include <random>
 
 void filmDetailsMenu(Node* selectedMovie, MysqlConnector* mysql, User* loggedInUser, MovieSystem* database) {
     int input;
@@ -56,7 +58,8 @@ void filmDetailsMenu(Node* selectedMovie, MysqlConnector* mysql, User* loggedInU
         } while (tmp != 'n' || tmp != 'i');
         
         mysql->insertEvent(3, selectedMovie->getId(), loggedInUser->getId());
-        loggedInUser->addWatched(selectedMovie);
+        mysql->updateWatched(selectedMovie->getId());
+        if (loggedInUser->notContainsWatched(selectedMovie)) loggedInUser->addWatched(selectedMovie);
         
     } else if (input == 3) {
         char tmp;
@@ -75,6 +78,35 @@ void filmDetailsMenu(Node* selectedMovie, MysqlConnector* mysql, User* loggedInU
         
     } else if (input == 4) {
         selectedMovie->printDetails();
+    } else if (input == 5) {
+        char tmp;
+        std::cout << "_________________________________________________" << std::endl;
+        std::cout << "Biztosan like-olni akarod a(z)" << selectedMovie->getTitle() << " cimu filmet az adatbazisbol? i/n" << std::endl;
+        std::cin >> tmp;
+        do {
+            std::cin >> tmp;
+            if (tmp == 'n') { return; }
+            else if (tmp == 'i') break;
+            else std::cout << "Csak 'i' es 'n' betuket adhatsz meg kis betukkel!!!"<< std::endl;
+        } while (tmp != 'n' || tmp != 'i');
+        
+        mysql->updateLikes(selectedMovie->getId());
+        
+        database->refreshDatabaseFromSql();
+    } else if (input == 6) {
+        char tmp;
+        std::cout << "_________________________________________________" << std::endl;
+        std::cout << "Biztosan dislike-olni akarod a(z)" << selectedMovie->getTitle() << " cimu filmet az adatbazisbol? i/n" << std::endl;
+        std::cin >> tmp;
+        do {
+            std::cin >> tmp;
+            if (tmp == 'n') { return; }
+            else if (tmp == 'i') break;
+            else std::cout << "Csak 'i' es 'n' betuket adhatsz meg kis betukkel!!!"<< std::endl;
+        } while (tmp != 'n' || tmp != 'i');
+        
+        mysql->updateDislikes(selectedMovie->getId());
+        database->refreshDatabaseFromSql();
     }
 }
 
@@ -90,17 +122,33 @@ void keresesMenu(MovieSystem* database, MysqlConnector* mysql, User* loggedInUse
     
     std::vector<Node*> result = database->searchInLocalDatabase(input);
     
+    std::vector<Node*> forDetailsMenu;
+    
     for (auto &iter :result) {
-        std::cout << sorsz << ". ";
-        iter->print();
-        sorsz++;
+        
+        if (Series* sorozat = dynamic_cast<Series*>(iter)) {
+            std::cout << sorozat->getTitle() << std::endl;
+            for (auto &d : sorozat->getSeasons()){
+                std::cout << "\t" << d.first << ". evad" << std::endl;
+                for( auto &x : d.second) {
+                    std::cout << sorsz << ". \t\t" << x->getTitle() << std::endl;
+                    forDetailsMenu.push_back(x);
+                    sorsz++;
+                }
+            }
+        } else {
+            std::cout << sorsz << ". ";
+            iter->print();
+            forDetailsMenu.push_back(iter);
+            sorsz++;
+        }
     }
     int selectedFilm;
     std::cout << "Valassz a listabol a sorszam alapjan filmet (visszalepes - 0)" << std::endl;
     std::cout << "valasztas: ";
     std::cin >> selectedFilm;
     if (selectedFilm == 0) { return; }
-    filmDetailsMenu(result[selectedFilm - 1], mysql, loggedInUser, database);
+    filmDetailsMenu(forDetailsMenu[selectedFilm - 1], mysql, loggedInUser, database);
     database->refreshDatabaseFromSql();
 }
 
@@ -113,6 +161,7 @@ void printMenu(MovieSystem* database, MysqlConnector* mysql, User* loggedInUser)
         std::cout << "2, Film hozzaadasa" << std::endl;
         std::cout << "3, Sorozat hozzaadasa" << std::endl;
         std::cout << "4, Jo napom van" << std::endl;
+        std::cout << "5, Mar megnezett filmek kiiratasa" << std::endl;
         std::cout << "0, Kilepes" << std::endl;
         std::cin >> input;
         
@@ -177,7 +226,13 @@ void printMenu(MovieSystem* database, MysqlConnector* mysql, User* loggedInUser)
             
             database->addSeries(++lastid,title, originalTitle, category,0,0, playtime, audio,subtitle, 0, 0, seasons);
         } else if (input == 4) {
-            
+            std::vector<std::string> selectedMoviesForRandomSelect = mysql->selectMaxWatchedCategoryForRandomSelect(loggedInUser);
+            srand(time(NULL));
+            std::shuffle(selectedMoviesForRandomSelect.begin(), selectedMoviesForRandomSelect.end(), std::mt19937 {std::random_device{}() } );
+            int randomIndex = rand() % selectedMoviesForRandomSelect.size();
+            std::cout << "______________________________________" << std::endl;
+            std::cout << "A random választott film címe: " << std::endl;
+            std::cout << selectedMoviesForRandomSelect[randomIndex] << std::endl;
         }
         
     } while (input != 0);
