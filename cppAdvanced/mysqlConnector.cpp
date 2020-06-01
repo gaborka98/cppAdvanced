@@ -272,7 +272,7 @@ std::vector<std::string> MysqlConnector::selectMaxWatchedCategoryForRandomSelect
 
 void MysqlConnector::updateWatched(int filmId) {
     int watchCount = 0;
-    rs = stmt->executeQuery("SELECT COUNT( film_events.ID ) AS `Watched` FROM film_events WHERE film_events.Type_id = 3 AND film_events.Film_id = 5");
+    rs = stmt->executeQuery("SELECT COUNT( film_events.ID ) AS `Watched` FROM film_events WHERE film_events.Type_id = 3 AND film_events.Film_id = " + std::to_string(filmId));
     while (rs->next()) {
         watchCount = rs->getInt("Watched");
     }
@@ -290,11 +290,21 @@ void MysqlConnector::loadWatchedMovies(User* loginUser) {
 }
 
 void MysqlConnector::updateLikes(int filmId) {
-    // TODO:definialni
+    int likeCount = 0;
+    rs = stmt->executeQuery("SELECT COUNT( film_events.ID ) AS `Watched` FROM film_events WHERE film_events.Type_id = 1 AND film_events.Film_id = " + std::to_string(filmId));
+    while (rs->next()) {
+        likeCount = rs->getInt("Likes");
+    }
+    stmt->executeUpdate("UPDATE Films SET Likes = " + std::to_string(likeCount) + " WHERE ID = " + std::to_string(filmId));
 }
 
 
 void MysqlConnector::updateDislikes(int filmId) {
-    // TODO: definialni
+    int dislikeCount = 0;
+    rs = stmt->executeQuery("SELECT COUNT( film_events.ID ) AS `Watched` FROM film_events WHERE film_events.Type_id = 2 AND film_events.Film_id = " + std::to_string(filmId));
+    while (rs->next()) {
+        dislikeCount = rs->getInt("Likes");
+    }
+    stmt->executeUpdate("UPDATE Films SET Likes = " + std::to_string(dislikeCount) + " WHERE ID = " + std::to_string(filmId));
 }
 
