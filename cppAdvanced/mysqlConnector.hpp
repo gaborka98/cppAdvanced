@@ -17,9 +17,9 @@
 #include <regex>
 
 #include "secrets.hpp"
-#include "Film.hpp"
-#include "Series.hpp"
-#include "User.hpp"
+#include "MovieSystem/Film.hpp"
+#include "MovieSystem/Series.hpp"
+#include "LoginSystem/User.hpp"
 
 class MysqlConnector{
 private:

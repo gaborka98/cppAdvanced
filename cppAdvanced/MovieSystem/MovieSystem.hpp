@@ -11,7 +11,7 @@
 
 #include <stdio.h>
 #include <list>
-#include "mysqlConnector.hpp"
+#include "../mysqlConnector.hpp"
 #include "Film.hpp"
 #include "Series.hpp"
 

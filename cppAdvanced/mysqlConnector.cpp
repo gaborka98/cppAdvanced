@@ -15,7 +15,7 @@ MysqlConnector::MysqlConnector() {
     try {
         driver = sql::mysql::get_mysql_driver_instance();
         con = driver->connect("mysql://127.0.0.1:3306", dbusername, dbpassword);
-        con->setSchema("cpp");
+        con->setSchema(database);
         stmt = con->createStatement();
     } catch (sql::SQLException &e) {
         std::cerr << e.what() << std::endl;

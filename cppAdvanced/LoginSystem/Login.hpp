@@ -13,7 +13,7 @@
 #include <string>
 
 #include "User.hpp"
-#include "mysqlConnector.hpp"
+#include "../mysqlConnector.hpp"
 
 User* loginProcess(MysqlConnector* mysql);
 

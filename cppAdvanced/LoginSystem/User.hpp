@@ -13,7 +13,7 @@
 #include <string>
 #include <vector>
 
-#include "Node.hpp"
+#include "../MovieSystem/Node.hpp"
 
 class User {
     int id;

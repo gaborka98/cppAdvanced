@@ -13,8 +13,8 @@
 #include <string>
 #include <iostream>
 
-#include "MovieSystem.hpp"
-#include "mysqlConnector.hpp"
+#include "../MovieSystem/MovieSystem.hpp"
+#include "../mysqlConnector.hpp"
 
 void printMenu(MovieSystem* database, MysqlConnector* mysql, User* loggedInUser);
 void keresesMenu(MovieSystem* database, MysqlConnector* mysql, User* loggedInUser);
